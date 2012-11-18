@@ -1,0 +1,23 @@
+div.gGrid{
+	position: relative;
+	margin: 20px auto;
+	overflow: hidden;
+}
+
+img.gGrid{
+	opacity: 0;
+	max-width: 100%;
+	height: auto;
+}
+
+div.gGrid>.cell{
+	position: absolute;
+	display: block;   
+	padding: 0px;
+	margin: 0px;
+	background: blue;   			
+   -moz-transition: opacity 1s; /* Firefox 4 */
+   -webkit-transition: opacity 1s; /* Safari and Chrome */
+   -o-transition: opacity 1s; /* Opera */
+   transition: opacity 1s;
+}

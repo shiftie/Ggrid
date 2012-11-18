@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Ggrid demo page</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link href='http://fonts.googleapis.com/css?family=Fugaz+One' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Share' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/gGrid.css">
+   	<style type="text/css">
+   		body{
+   			text-align: left;
+   			font-family: 'Share', cursive;
+   			font-size: 1em;
+   			color: #333333;
+   			margin: 0;
+   			padding: 0;
+			background: #ffffff; /* Old browsers */
+			background: -moz-radial-gradient(center, ellipse cover,  #ffffff 0%, #dddddd 100%); /* FF3.6+ */
+			background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#ffffff), color-stop(100%,#dddddd)); /* Chrome,Safari4+ */
+			background: -webkit-radial-gradient(center, ellipse cover,  #ffffff 0%,#dddddd 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-radial-gradient(center, ellipse cover,  #ffffff 0%,#dddddd 100%); /* Opera 12+ */
+			background: -ms-radial-gradient(center, ellipse cover,  #ffffff 0%,#dddddd 100%); /* IE10+ */
+			background: radial-gradient(ellipse at center,  #ffffff 0%,#dddddd 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#dddddd',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+   		}
+
+   		h1, h2{
+   			display: inline;
+   			font-family: 'Fugaz One', cursive;
+   		}
+
+   		h1{
+   			font-size: 2.5em;
+   		}
+
+   		h2{
+   			color: #897eb3;
+   			text-decoration: underline;
+   		}
+
+   		hr{
+   			color: white;
+   		}
+
+   		#header{
+   			text-align: right;
+   			width: 100%;
+   			color: white;
+   			margin-bottom: 20px;
+   		}
+
+   		#header>span{
+   			padding: 10px;
+   		}
+
+   		.doc{
+   			display: inline-block;
+   			width: 49%;		
+   			margin: 0;
+   			padding: 0;
+   			vertical-align: top;
+   		}
+
+   		.doc span{
+		  font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+		  text-align: left;
+		  font-size: 12px;
+		  margin: .5em;
+		  display: block;
+		}
+
+		.doc span b{
+		  font-size: 1.2em;
+		}
+
+		#scroll{
+			margin: 0px auto;
+			text-align: center;
+			color: white;
+			height: auto;
+			font-size: 1.25em;
+		}
+
+   		#container{
+   			width: 960px;
+   			position: relative;	
+   			margin: 0px auto;			
+   		}
+
+   		.css3gradient{width:300px;height:100px;
+			background: #897eb3; /* Old browsers */
+			background: -moz-linear-gradient(-45deg,  #897eb3 0%, #bd6c91 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#897eb3), color-stop(100%,#bd6c91)); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(-45deg,  #897eb3 0%,#bd6c91 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(-45deg,  #897eb3 0%,#bd6c91 100%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(-45deg,  #897eb3 0%,#bd6c91 100%); /* IE10+ */
+			background: linear-gradient(135deg,  #897eb3 0%,#bd6c91 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#897eb3', endColorstr='#bd6c91',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+		}
+	</style>
+</head>
+<body>
+	<div id="header" class="css3gradient">
+		<span><h1>Ggrid Image Fader</h1></span>
+		<span>by Gordan Dzinovic</span>
+	</div>
+	<div id="container">
+		<div style="width: 100%;">	
+			<div class="doc">
+				<h2>Overview</h2>
+				<br/>
+				Ggrid is a jQuery plugin that replaces selected pictures by a grid system that fades in cell by cell using CSS3 transitions.
+				<br/>
+				<h2>Linkage</h2>
+				<br/>
+				Link CSS & JS files to your page :
+				<span>
+					&#60;link rel="stylesheet" href="css/gGrid.css"&#62;
+					<br/>
+					&#60;script src="js/gGrid.js"&#62;&#60;/script&#62;
+				</span>
+				<h2>Markup</h2>
+				<br/>
+				<span>
+					&#60;img src="bg2.jpg" class="gGrid"&#62;
+				</span>
+				<h2>Call</h2>
+				<br/>
+				<span>
+					$('img.gGrid').gGrid();
+				</span>
+			</div>
+			<div class="doc">				
+				<h2>Options</h2>
+				<br/>
+				<span>
+					<b>minDelay</b> (default : 0) : minimal delay of the next fadein transition in the row<br/>
+					<b>maxDelay</b>(default : 1.5) : maximal delay of the next fadein transition in the row<br/>
+					<b>cellPerRow</b> (default : 8) : number of cells per row
+				</span>
+				Exemple:<br/>
+				<span>
+					$('img.gGrid').gGrid({minDelay: 0.5, maxDelay: 1.5});					
+				</span>
+				Markup configuration:<br/>
+				<span>
+					&#60;img src="bg.jpg" class="gGrid" data-cell="7"&#62;					
+				</span>								
+			</div>	
+		</div>
+		<div id="scroll" class="css3gradient">
+			scroll down to see the effect
+		</div>
+		<hr/>
+		<img src="img/1.jpg" class="gGrid" data-cell="7">
+		<img src="img/2.jpg" class="gGrid">
+		<img src="img/3.jpg" class="gGrid">
+		<img src="img/4.jpg" class="gGrid">
+		<img src="img/5.jpg" class="gGrid">
+		<img src="img/6.jpg" class="gGrid">
+		<img src="img/7.jpg" class="gGrid">
+		<img src="img/8.jpg" class="gGrid">		
+	</div>
+
+	<!-- Javascript -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
+	<script src="js/gGrid.js"></script>
+	<script type="text/javascript">		
+		$(function() {
+			$('img.gGrid').gGrid({minDelay: 0.5, maxDelay: 1.5});
+		});		
+	</script>
+</body>
+</html>
