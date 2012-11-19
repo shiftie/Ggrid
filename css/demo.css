@@ -2,7 +2,7 @@ body{
 	text-align: left;
 	font-family: 'Share', cursive;
 	font-size: 1em;
-	color: #333333;
+	color: white;
 	margin: 0;
 	padding: 0;
 	background: #ffffff; /* Old browsers */
@@ -25,7 +25,7 @@ h1{
 }
 
 h2{
-	color: #897eb3;
+	color: white;
 	text-decoration: underline;
 }
 
@@ -44,12 +44,33 @@ hr{
 	padding: 10px;
 }
 
+#documentation{
+	color: #9AC920;
+	cursor: pointer;	
+}
+
+#docContent{
+	padding: 10px;
+}
+
 .doc{
-	display: inline-block;
-	width: 49%;		
+	display: block;
+	width: 100%;		
 	margin: 0;
-	padding: 0;
+	padding: 0px;
 	vertical-align: top;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	/* Fallback for web browsers that doesn't support RGBa */
+	background: rgb(0, 0, 0);
+	/* RGBa with 0.6 opacity */
+	background: rgba(0, 0, 0, 0.6);
+	-moz-transition: height 1s;
+	-webkit-transition: height 1s;
+	-o-transition: height 1s;
+	transition: height 1s;
+	overflow: hidden;	
 }
 
 .doc span{
@@ -61,21 +82,18 @@ display: block;
 }
 
 .doc span b{
-font-size: 1.2em;
-}
-
-#scroll{
-margin: 0px auto;
-text-align: center;
-color: white;
-height: auto;
-font-size: 1.25em;
+	font-size: 1.2em;
 }
 
 #container{
-	width: 960px;
+	width: 100%;
 	position: relative;	
 	margin: 0px auto;			
+}
+
+#grids{
+	position: relative;
+	top: 1px;
 }
 
 .css3gradient{width:300px;height:100px;

@@ -2,14 +2,14 @@ Ggrid = {
 	init : function (image, gridIndex, options) {
 		this.gridW = image.width();
 	 	this.gridH = image.height();
-	 	if(image.data('cell')){
-	 		this.cellPerRow = image.data('cell');
+	 	if(image.data('cellperrow')){
+	 		this.cellPerRow = image.data('cellperrow');
 	 	}else{
 	 		this.cellPerRow = options.cellPerRow;
 	 	}
 	 	this.bg = image.attr('src');
 
-	 	image.before($('<div class="gGrid" data-cell="'+this.cellPerRow+'"></div>'));
+	 	image.before($('<div class="gGrid" data-cellperrow="'+this.cellPerRow+'"></div>'));
 
 			this.grid = image.prev();
 			this.grid.css({'width': this.gridW+'px', 'height': this.gridH+'px'});
@@ -70,7 +70,8 @@ function randomXToY(minVal,maxVal,floatVal)
 	var defaults = {  
 		minDelay: 0,
 		maxDelay: 1.5,
-		cellPerRow: 8
+		cellPerRow: 8,
+		fadeDuration: 1
 	};  
     
   	var options = $.extend(defaults, options);  
@@ -79,53 +80,46 @@ function randomXToY(minVal,maxVal,floatVal)
 
     $(window).scroll(function() {
     	clearTimeout(timer);
-        timer = setTimeout( refresh , 150 );
+        timer = setTimeout( refreshScroll , 50 );
 	});
 
-	function refresh() {
-		console.log('in2');
+	function refreshScroll() {
 		visibleAreaTop = $(window).scrollTop();
 		visibleAreaBottom = $(window).scrollTop() + $(window).height();
 
 		//for each grid
 		for(g = 0; g < gGrids.length; g++){
 			currentGrid = gGrids[g];
-			if(currentGrid.isFadedIn == false){
 				for (i = 1; i <= currentGrid.totalRaws; i++) {
-	 			//if row is displayed in window
-	 			if((visibleAreaBottom >  $('#grid'+g+'cell'+i+'-0').offset().top) && (visibleAreaTop < $('#grid'+g+'cell'+i+'-0').offset().top)){
-	 				//if not already visible
-	 				if($('#grid'+g+'cell'+i+'-0').hasClass('hidden')){
-	 					for (j = 0; j < currentGrid.cellPerRow; j++) {
-	 						$('#grid'+g+'cell'+i+'-'+j).removeClass('hidden');
-	 						delay = (randomXToY(options.minDelay, options.maxDelay, 2))+'s';	 						
-	 						delayString = '-moz-transition-delay:'+delay+'; -webkit-transition-delay:'+delay+'; -o-transition-delay:'+delay+'; transition-delay:'+delay+';';
-	 						//console.log($('#grid'+g+'cell'+i+'-'+j).attr('style'));
-	 						$('#grid'+g+'cell'+i+'-'+j).attr('style', $('#grid'+g+'cell'+i+'-'+j).attr('style') + delayString);
-	 						/*$('#grid'+g+'cell'+i+'-'+j).css('-moz-transition-delay', delay)
-	 										  .css('-webkit-transition-delay', delay)
-	 										  .css('-o-transition-delay', delay)
-	 										  .css('transition-delay', delay);*/
-							$('#grid'+g+'cell'+i+'-'+j).css('opacity', 1);
-						};
-	 				}				
-				}
-	 		};
-			}
+		 			//if row is displayed in window
+		 			if((visibleAreaBottom >  $('#grid'+g+'cell'+i+'-0').offset().top) && (visibleAreaTop < $('#grid'+g+'cell'+i+'-0').offset().top)){
+		 				//if not already visible
+		 				if($('#grid'+g+'cell'+i+'-0').hasClass('hidden')){
+		 					for (j = 0; j < currentGrid.cellPerRow; j++) {
+		 						//we remove 'hidden' class to precise that the row is already set & fading in
+		 						$('#grid'+g+'cell'+i+'-'+j).removeClass('hidden');
+		 						delay = (randomXToY(options.minDelay, options.maxDelay, 2))+'s';
+		 						//setting transition inline
+		 						transitionString = '-moz-transition: opacity '+options.fadeDuration+'s ease '+delay+';-webkit-transition: opacity '+options.fadeDuration+'s ease '+delay+';-o-transition: opacity '+options.fadeDuration+'s ease '+delay+';transition: opacity '+options.fadeDuration+'s ease '+delay+';';
+		 						//setting background size
+		 						backgroundSizeString = 'background-size: '+currentGrid.gridW+'px '+currentGrid.gridH+'px;';
+		 						//updating the style	 						
+		 						$('#grid'+g+'cell'+i+'-'+j).attr('style', $('#grid'+g+'cell'+i+'-'+j).attr('style') + transitionString + backgroundSizeString);
+								$('#grid'+g+'cell'+i+'-'+j).css('opacity', 1);
+							};
+		 				}				
+					}
+		 		}
 		}
 	}
 
 	$(window).scroll();
 
-	 return this.each(function() {  
-    	obj = $(this); 
-  		
-  		gGrid = Ggrid;						
-		gGrid.init(obj, gGrids.length, options);								
+	return this.each(function() {  
+    	$this = $(this);  		
+  		gGrid = Ggrid;
+		gGrid.init($this, gGrids.length, options);								
 		gGrids.push($.extend({}, gGrid));
-
-		console.log('in');
-	});  
-
+	});
 };  
 })(jQuery); 
